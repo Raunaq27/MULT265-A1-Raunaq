@@ -1,17 +1,33 @@
 <script src="http://localhost:8097" />;
 import React from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.heading}>To do list:</Text>
+const App = () => {
+  const [text, onChangeText] = React.useState('Useless Text');
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.heading}>To do list:</Text>
+      <View>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+          editable
+        />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   heading: {
@@ -23,7 +39,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   container: {
-    backgroundColor: 'grey',
+    backgroundColor: 'green',
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
 
