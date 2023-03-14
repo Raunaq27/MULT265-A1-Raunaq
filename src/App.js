@@ -49,18 +49,22 @@ const App = () => {
         <Button title="Add To Do" color={'white'} onClick={handleSubmit} />
 
         {todos.map(todo => (
-          <TouchableOpacity onClick={() => handleToggleCompleted(todo.id)}>
-            <Text key={todo.id}>
-              <Text>{todo.text}</Text>
+          <View style={styles.containerTest}>
+            <TouchableOpacity
+              style={styles.containerTest}
+              onChange={() => handleToggleCompleted(todo.id)}>
+              <View key={todo.id}>
+                <Text>{todo.text}</Text>
 
-              <Button
-                title="Delete"
-                onClick={() => {
-                  handleDeleteTodo(todo.id);
-                }}
-              />
-            </View>
-          </TouchableOpacity>
+                <Button
+                  title="Delete"
+                  onClick={() => {
+                    handleDeleteTodo(todo.id);
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         ))}
       </View>
     </ScrollView>
@@ -76,7 +80,18 @@ const styles = StyleSheet.create({
     marginTop: 50,
     textAlign: 'center',
   },
+  mainText: {
+    fontSize: 20,
+    marginVertical: 40,
+    color: 'white',
+    margin: 10,
+    marginTop: 50,
+    textAlign: 'center',
+  },
   container: {
+    backgroundColor: 'red',
+  },
+  containerTest: {
     backgroundColor: 'green',
   },
   input: {
@@ -84,6 +99,10 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  scrollView: {
+    backgroundColor: 'black',
+    color: 'white',
   },
 });
 
