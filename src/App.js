@@ -1,3 +1,4 @@
+<script src="http://localhost:8097" />;
 import React from 'react';
 
 import {View, Text, StyleSheet} from 'react-native';
@@ -5,19 +6,24 @@ import {View, Text, StyleSheet} from 'react-native';
 class App extends React.Component {
   render() {
     return (
-      <View>
-        <Text style={styles.centerText}>Text</Text>
+      <View style={styles.container}>
+        <Text style={styles.heading}>To do list:</Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  centerText: {
-    textAlign: 'center',
-    fontSize: 20,
-    marginHorizontal: 15,
+  heading: {
+    fontSize: 30,
     marginVertical: 40,
+    color: 'white',
+    margin: 10,
+    marginTop: 50,
+    textAlign: 'center',
+  },
+  container: {
+    backgroundColor: 'grey',
   },
 });
 
