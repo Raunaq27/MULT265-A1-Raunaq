@@ -17,7 +17,7 @@ const App = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
   const handleSubmit = event => {
-    event.preventDefault();
+    console.log('hello');
     setTodos([...todos, {id: Date.now(), text: newTodo, completed: false}]);
     setNewTodo('');
   };
@@ -46,25 +46,24 @@ const App = () => {
           value={newTodo}
           onChange={event => setNewTodo(event.target.value)}
         />
-        <Button title="Add To Do" color={'white'} onClick={handleSubmit} />
+        <Button title="Add To Do" color={'white'} onPress={handleSubmit} />
 
         {todos.map(todo => (
-          <View style={styles.containerTest}>
-            <TouchableOpacity
-              style={styles.containerTest}
-              onChange={() => handleToggleCompleted(todo.id)}>
-              <View key={todo.id}>
-                <Text>{todo.text}</Text>
+          <TouchableOpacity
+            style={styles.containerTest}
+            key={todo.id}
+            onChange={() => handleToggleCompleted(todo.id)}>
+            <View key={todo.id}>
+              <Text style={styles.mainText}>{todo.text}</Text>
 
-                <Button
-                  title="Delete"
-                  onClick={() => {
-                    handleDeleteTodo(todo.id);
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
+              <Button
+                title="Delete"
+                onPress={() => {
+                  handleDeleteTodo(todo.id);
+                }}
+              />
+            </View>
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
