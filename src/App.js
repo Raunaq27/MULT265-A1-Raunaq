@@ -59,7 +59,7 @@ const App = () => {
                   handleDeleteTodo(todo.id);
                 }}
               />
-            </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </View>
