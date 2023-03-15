@@ -12,31 +12,28 @@ import {
 } from 'react-native';
 
 const App = () => {
-  // const [text, onChangeText] = React.useState('Useless Text');
+  const [text, onChangeText] = React.useState('');
 
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
-  const handleSubmit = event => {
-    console.log('hello');
-    setTodos([...todos, {id: Date.now(), text: newTodo, completed: false}]);
-    setNewTodo('');
+  // const handleSubmit = event => {
+  //   console.log('hello');
+  //   setTodos([...todos, {id: Date.now(), text: newTodo, completed: false}]);
+  //   setNewTodo('');
+  // };
+  const submit = () => {
+    console.log('Submit was pressed');
+    setTodos([...todos, {id: Date.now(), text: newTodo, checked: false}]);
+    setNewTodo([newTodo]); // spread syntax
   };
-  const handleToggleCompleted = id => {
-    setTodos(
-      todos.map(todo => {
-        if (todo.id === id) {
-          return {...todo, completed: !todo.completed};
-        } else {
-          return todo;
-        }
-      }),
-    );
-  };
-
   const handleDeleteTodo = id => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const [toggle, setToggle] = useState(true);
+  const toggleFunction = () => {
+    setToggle(!toggle);
+  };
   return (
     <ScrollView style={styles.scrollView}>
       <View>
@@ -46,16 +43,15 @@ const App = () => {
             style={styles.input}
             type="text"
             value={newTodo}
-            onChange={event => setNewTodo(event.target.value)}
+            onChangeText={setNewTodo}
           />
-          <Button title="Add To Do" color={'white'} onPress={handleSubmit} />
+          <Button title="Add To Do" color={'white'} onPress={submit} />
         </View>
+
         <View>
           {todos.map(todo => (
-            <TouchableOpacity
-              key={todo.id}
-              onChange={() => handleToggleCompleted(todo.id)}>
-              <View style={[styles.random, todo.isSelected && styles.selected]}>
+            <TouchableOpacity onPress={() => toggleFunction()} key={todo.id}>
+              <View style={toggle ? styles.random : styles.selected}>
                 <Text style={styles.mainText}>{todo.text}</Text>
 
                 <Button
@@ -96,14 +92,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   random: {
-    backgroundColor: 'green',
+    backgroundColor: 'red',
     fontSize: 20,
     color: 'white',
-    margin: 5,
     textAlign: 'center',
+    marginVertical: 2,
   },
   selected: {
-    opacity: 0.3,
+    backgroundColor: 'green',
+    marginVertical: 2,
   },
   input: {
     height: 40,
