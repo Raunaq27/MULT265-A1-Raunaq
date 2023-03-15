@@ -32,39 +32,43 @@ const App = () => {
       }),
     );
   };
+
   const handleDeleteTodo = id => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
     <ScrollView style={styles.scrollView}>
-      <View style={styles.container}>
-        <Text style={styles.heading}>To do list:</Text>
-        <TextInput
-          style={styles.input}
-          type="text"
-          value={newTodo}
-          onChange={event => setNewTodo(event.target.value)}
-        />
-        <Button title="Add To Do" color={'white'} onPress={handleSubmit} />
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.heading}>To do list:</Text>
+          <TextInput
+            style={styles.input}
+            type="text"
+            value={newTodo}
+            onChange={event => setNewTodo(event.target.value)}
+          />
+          <Button title="Add To Do" color={'white'} onPress={handleSubmit} />
+        </View>
+        <View>
+          {todos.map(todo => (
+            <TouchableOpacity
+              key={todo.id}
+              onChange={() => handleToggleCompleted(todo.id)}>
+              <View style={[styles.random, todo.isSelected && styles.selected]}>
+                <Text style={styles.mainText}>{todo.text}</Text>
 
-        {todos.map(todo => (
-          <TouchableOpacity
-            style={styles.containerTest}
-            key={todo.id}
-            onChange={() => handleToggleCompleted(todo.id)}>
-            <View key={todo.id}>
-              <Text style={styles.mainText}>{todo.text}</Text>
-
-              <Button
-                title="Delete"
-                onPress={() => {
-                  handleDeleteTodo(todo.id);
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-        ))}
+                <Button
+                  color={'white'}
+                  title="Delete"
+                  onPress={() => {
+                    handleDeleteTodo(todo.id);
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -81,23 +85,39 @@ const styles = StyleSheet.create({
   },
   mainText: {
     fontSize: 20,
-    marginVertical: 40,
+    marginVertical: 50,
     color: 'white',
     margin: 10,
     marginTop: 50,
     textAlign: 'center',
+    padding: 10,
   },
   container: {
-    backgroundColor: 'red',
-  },
-  containerTest: {
     backgroundColor: 'green',
+  },
+  random: {
+    backgroundColor: 'green',
+    fontSize: 20,
+    color: 'white',
+    margin: 5,
+    textAlign: 'center',
+  },
+  selected: {
+    opacity: 0.3,
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  btn: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    color: 'white',
   },
   scrollView: {
     backgroundColor: 'black',
